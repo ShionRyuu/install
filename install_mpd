@@ -1,0 +1,25 @@
+#!/bin/sh
+
+mpd_url="http://www.musicpd.org/download/mpd/0.19/mpd-0.19.10.tar.xz"
+
+apt-get update
+apt-get upgrade -y --show-upgraded
+
+apt-get install -y libboost-all-dev libicu-dev libwrap0-dev libid3tag0-dev libavahi-client-dev pulseaudio-module-zeroconf libsqlite0-dev libsamplerate0-dev libsoxr-dev libsmbclient-dev libnfs-dev libyajl-dev libcdio-paranoia-dev libmms-dev libbz2-dev libupnp-dev libadplug-dev libaudiofile-dev libfaad-dev libavformat-dev libflac-dev libfluidsynth-dev libgme-dev libmad0-dev libshout3-dev libmpg123-dev libmodplug-dev libopus-dev libmpcdec-dev libsidplay2-dev libwavpack-dev libwildmidi-dev libshine-dev libmp3lame-dev libtwolame-dev libroar-dev libao-dev libopenal-dev libsystemd-daemon-dev libresid-builder-dev libsidutils-dev sqlite
+
+if [ ! -s "./mpd-0.19.10.tar.xz" ]; then
+    wget -c -O mpd-0.19.10.tar.xz $erl_url
+fi
+
+tar -xJf mpd-0.19.10.tar.xz
+cd mpd-0.19.10
+
+./configure
+make && make install
+
+mkdir -p ~/.mpd/playlists
+touch ~/.mpd/{log,database}
+
+apt-get autoclean -y
+apt-get clean -y
+apt-get autoremove -y

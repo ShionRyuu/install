@@ -1,0 +1,16 @@
+#!/bin/sh
+
+apt-get install libxmlrpc-c++8-dev
+
+wget -c https://github.com/rakshasa/libtorrent/archive/branch-0.13.5.tar.gz
+tar -xzf branch-0.13.5.tar.gz
+cd libtorrent-0.13.5
+./configure
+make && make install
+
+wget -c https://github.com/rakshasa/rtorrent/archive/0.9.5.tar.gz
+tar -xzf 0.9.5.tar.gz
+cd rtorrent-0.9.5
+./configure --with-xmlrpc-c
+make && make install
+
